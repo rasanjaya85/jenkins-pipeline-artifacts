@@ -19,11 +19,11 @@
 # This script builds a zipped file of a WSO2 WUM supported product after applying the followings.
 # If INITIAL_RUN,
 #     1. WUM update.
-#     2. Apply custom configurations using a configuration managemnt tool like Ansible or Puppet.
+#     2. Apply custom configurations using a configuration management tool like Ansible or Puppet.
 #     3. Copy the artifact(s) to the location(s).
 #     4. Run the in-place updates tool.
 # If not the INITIAL_RUN,
-#     1. Apply custom configurations using a configuration managemnt tool like Ansible or Puppet.
+#     1. Apply custom configurations using a configuration management tool like Ansible or Puppet.
 #     2. Copy the artifact(s) to the location(s).
 #     3. Run the in-place updates tool.
 #

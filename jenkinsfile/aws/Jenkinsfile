@@ -71,6 +71,19 @@ node(NODE_MASTER) {
             copy([src: "${RESOURCES}/*", dest: "${IMAGE_RESOURCES_LOC}"])
             copy([src: "${PACKER_RESOURCES}/*", dest: "${IMAGE_RESOURCES_LOC}"])
         }
+
+         stage(Constants.Stages.BUILD_PACK) {
+            log.info "Generate Pack with configs"
+            applyConfig([product       : "$params.PRODUCT",
+                         version       : "$params.VERSION",
+                         wum_creds     : "${WUM_CREDS}",
+                         puppetManifest: "${PUPPET_CONF}",
+                         artifactsLoc  : "${ARTIFACT_LOC}",
+                         zipLoc        : "${IMAGE_RESOURCES_LOC}",
+                         wumHome       : "${WUM_HOME}",
+                         puppetConfLoc : "${PUPPET_CONF_DIR}"])
+        }
+
     } catch (exc) {
         log.err "Caught: ${exc}"
         String recipient = env.Email
