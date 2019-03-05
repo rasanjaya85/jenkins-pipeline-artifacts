@@ -96,6 +96,24 @@ node(NODE_MASTER) {
                                        imageResources: "${IMAGE_RESOURCES_LOC}"])
         }
 
+        stage(Constants.Stages.DEPLOY_STAGING) {
+            log.info "Deploying to Staging"
+            env.TEST_ENDPOINT = deployAWS([wso2InstanceType: "${env.WSO2InstanceType}",
+                       keyPairName     : "${env.KeyPairName}",
+                       certName        : "${env.CertificateName}",
+                       dbUsername      : "${env.DBUsername}",
+                       dbPassword      : "${env.DBPassword}",
+                       jdkVersion      : "${env.JDKVersion}",
+                       amiID           : "${env.IMAGE_ID}",
+                       credID          : "${AWS_CREDS}",
+                       region          : "${env.REGION}",
+                       environment     : "${STACK_STAGING}",
+                       cf              : "${STAGING_CF}",
+                       testEndpoint    : "${TEST_ENDPOINT_KEY}",
+                       awsCredsFile    : "${AWS_CREDS_LOC}"])
+        }
+
+
     } catch (exc) {
         log.err "Caught: ${exc}"
         String recipient = env.Email
