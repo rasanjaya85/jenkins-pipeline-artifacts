@@ -113,14 +113,6 @@ node(NODE_MASTER) {
                        awsCredsFile    : "${AWS_CREDS_LOC}"])
         }
 
-         stage(Constants.Stages.RUNNING_TESTS) {
-            log.info "Running Test"
-            log.info "${TEST_ENDPOINT}"
-            def TEST_SCRIPT = "mvn  test -Dendpoint=${TEST_ENDPOINT} -D{$REMOVE_LOGS}"
-            dir("${ARTIFACTS_DIR}/tests/sample-scenario-tests") {
-                executeTests "${TEST_SCRIPT}"
-            }
-        }
 
 
     } catch (exc) {
